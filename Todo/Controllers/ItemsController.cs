@@ -17,7 +17,12 @@ namespace Todo.Controllers
         // GET: Items
         public ActionResult Index()
         {
-            var items = db.Items.Include(i => i.List);
+            //ORDER BY ListID, DueDate
+            //LINQ which allows us to do SQL type code in C#
+            var items = from n in db.Items
+                        orderby n.ListID, n.DueDate
+                        select n;
+            
             return View(items.ToList());
         }
 
@@ -94,6 +99,11 @@ namespace Todo.Controllers
             return View(item);
         }
 
+        //public ActionResult SetDone(int? id, bool newDoneValue)
+        //{
+
+        //}
+        
         public ActionResult ToggleDone(int? id)
         {
             if (id == null)
