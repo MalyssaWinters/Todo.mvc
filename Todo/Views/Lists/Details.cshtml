@@ -17,9 +17,16 @@
         <dd>
             @Html.DisplayFor(model => model.ListTitle)
         </dd>
-
     </dl>
 </div>
+
+<ul>
+    @foreach (var item in Model.Items)
+    {
+        <li>@item.ItemName</li>
+    }
+</ul>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ListID }) |
     @Html.ActionLink("Back to List", "Index")
