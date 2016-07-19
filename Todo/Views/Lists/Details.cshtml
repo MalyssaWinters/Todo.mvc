@@ -20,12 +20,60 @@
     </dl>
 </div>
 
-<ul>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            Name
+        </th>
+        <th>
+            Due Date
+        </th>
+        <th>
+            Details
+        </th>
+        <th>
+            List
+        </th>
+        <th></th>
+    </tr>
     @foreach (var item in Model.Items)
-    {
-        <li>@item.ItemName</li>
+            {
+        <tr>
+            <td>
+                <a href="@Url.Action("ToggleDone", new { id = item.ItemID })">
+                    @if (item.IsDone)
+                {
+                        <span class="glyphicon glyphicon-check"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-unchecked"></span>
+                    }
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.List.ListTitle)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+            </td>
+        </tr>
     }
-</ul>
+</table>
+
+
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ListID }) |
